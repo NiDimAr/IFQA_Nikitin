@@ -1,0 +1,24 @@
+package ifellow.example.test;
+
+import ConfiguringBrowser.WebHooks;
+import ifellow.example.pages.LoginPage;
+import ifellow.example.pages.ProjectPage;
+import org.junit.jupiter.api.Test;
+
+public class TestProjectTest extends WebHooks {
+
+    @Test
+    void Scenario() {
+
+        LoginPage loginPage = new LoginPage();
+        ProjectPage projectPage = new ProjectPage();
+
+
+        loginPage.openPage()
+                .login("AT5", "Qwerty123");
+
+
+        projectPage.openProject("Test");
+
+    }
+}
