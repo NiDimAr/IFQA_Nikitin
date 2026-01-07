@@ -1,7 +1,7 @@
-package RickAndMorty.Api;
+package org.RickAndMorty.Api;
 
-import RickAndMorty.Models.Episode;
-import RickAndMorty.Specs.ResponseSpec;
+import org.RickAndMorty.Models.Episode;
+import org.RickAndMorty.Specs.ResponseSpec;
 
 import static io.restassured.RestAssured.given;
 

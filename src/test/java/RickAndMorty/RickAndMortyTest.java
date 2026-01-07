@@ -1,55 +1,35 @@
 package RickAndMorty;
 
-import RickAndMorty.Api.CharacterApi;
-import RickAndMorty.Api.EpisodeApi;
-import RickAndMorty.Models.Character;
-import RickAndMorty.Models.Episode;
+import org.RickAndMorty.Models.Character;
+import org.RickAndMorty.Models.Episode;
+import org.RickAndMorty.Steps.CharacterSteps;
+import org.RickAndMorty.Steps.EpisodeSteps;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class RickAndMortyTest {
+
     @Test
-    public void checkLastEpisodeLastCharacter() {
+    public void shouldCompareMortyWithLastEpisodeCharacter() {
 
+        Character morty = CharacterSteps.morty();
 
-        Character morty =
-                CharacterApi.getCharacterByName("Morty Smith");
-
-        String mortySpecies = morty.getSpecies();
-        String mortyLocation = morty.getLocation() != null
-                ? morty.getLocation().getName()
-                : null;
-
-
-        assertNotNull(morty.getEpisode());
-        assertFalse(morty.getEpisode().isEmpty());
-
-        String lastEpisodeUrl =
-                morty.getEpisode().get(morty.getEpisode().size() - 1);
-
-        Episode episode =
-                EpisodeApi.getEpisodeByUrl(lastEpisodeUrl);
-
-        String lastCharacterUrl =
-                episode.getCharacters()
-                        .get(episode.getCharacters().size() - 1);
+        Episode lastEpisode =
+                EpisodeSteps.lastEpisode(CharacterSteps.lastEpisodeUrl(morty));
 
         Character lastCharacter =
-                CharacterApi.getCharacterByUrl(lastCharacterUrl);
+                EpisodeSteps.lastCharacter(lastEpisode);
 
-        String lastCharacterLocation = lastCharacter.getLocation() != null
-                ? lastCharacter.getLocation().getName()
-                : null;
-
-        assertNotEquals(
-                mortySpecies,
+        assertEquals(
+                morty.getSpecies(),
                 lastCharacter.getSpecies()
         );
 
         assertNotEquals(
-                mortyLocation,
-                lastCharacterLocation
+                morty.getLocation().getName(),
+                lastCharacter.getLocation().getName()
         );
     }
 }

@@ -1,12 +1,13 @@
-package RickAndMorty.Api;
+package org.RickAndMorty.Api;
 
-import RickAndMorty.Specs.RequestSpec;
-import RickAndMorty.Specs.ResponseSpec;
+import org.RickAndMorty.Models.Character;
+import org.RickAndMorty.Specs.RequestSpec;
+import org.RickAndMorty.Specs.ResponseSpec;
 
 import static io.restassured.RestAssured.given;
 
 public class CharacterApi {
-    public static RickAndMorty.Models.Character getCharacterByName(String name) {
+    public static Character getCharacterByName(String name) {
         return given()
                 .spec(RequestSpec.defaultSpec())
                 .queryParam("name", name)
@@ -16,16 +17,16 @@ public class CharacterApi {
                 .spec(ResponseSpec.success200())
                 .extract()
                 .jsonPath()
-                .getObject("results[0]", RickAndMorty.Models.Character.class);
+                .getObject("results[0]", Character.class);
     }
 
-    public static RickAndMorty.Models.Character getCharacterByUrl(String url) {
+    public static Character getCharacterByUrl(String url) {
         return given()
                 .when()
                 .get(url)
                 .then()
                 .spec(ResponseSpec.success200())
                 .extract()
-                .as(RickAndMorty.Models.Character.class);
+                .as(Character.class);
     }
 }

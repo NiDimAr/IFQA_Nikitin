@@ -1,16 +1,16 @@
 package ServerIF_HW5.specs;
 
+import Config.Config;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-import static io.restassured.http.ContentType.JSON;
 
 public class RequestSpec {
     public static RequestSpecification baseSpec() {
         return new RequestSpecBuilder()
-                .setBaseUri("http://localhost")
-                .setPort(8080)
-                .setContentType(JSON)
+                .setBaseUri(Config.SERVER_URL)
+                .setContentType(ContentType.JSON)
                 .build();
     }
 }

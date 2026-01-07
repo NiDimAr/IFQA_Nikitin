@@ -1,6 +1,6 @@
-package RickAndMorty.Specs;
+package org.RickAndMorty.Specs;
 
-import RickAndMorty.Config.Config;
+import Config.Config;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 
