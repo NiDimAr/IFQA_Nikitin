@@ -16,8 +16,7 @@ public class TestTotalNumberOfTasksInProject extends WebHooks {
         ProjectPage projectPage = new ProjectPage();
 
 
-        loginPage.openPage()
-                .login("AT5", "Qwerty123");
+        loginPage.login("AT5", "Qwerty123");
 
 
         projectPage.openProject("Test");

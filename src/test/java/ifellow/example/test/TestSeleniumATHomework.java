@@ -1,5 +1,6 @@
 package ifellow.example.test;
 
+import ConfiguringBrowser.Config;
 import ConfiguringBrowser.WebHooks;
 import ifellow.example.pages.LoginPage;
 import ifellow.example.pages.ProjectPage;
@@ -16,11 +17,10 @@ public class TestSeleniumATHomework extends WebHooks {
         TaskSearchPage taskSearchPage = new TaskSearchPage();
 
 
-        loginPage.openPage()
-                .login("AT5", "Qwerty123");
+        loginPage.login(Config.login, Config.password);
 
 
-        projectPage.openProject("Test");
+        projectPage.openProject(Config.project);
 
         projectPage.switchTheFilter();
 

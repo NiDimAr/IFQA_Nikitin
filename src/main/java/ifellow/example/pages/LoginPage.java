@@ -1,26 +1,23 @@
 package ifellow.example.pages;
 
-import com.codeborne.selenide.WebDriverRunner;
-import ifellow.example.Locators.LocatorLoginPage;
+import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.$x;
 
 
 public class LoginPage {
-    private final LocatorLoginPage locatorLoginPage = new LocatorLoginPage();
+    private final SelenideElement usernameInput = $x("//input[contains(@class, 'medium-field') and @name='os_username']").as("Поле имя пользователя");
+    private final SelenideElement passwordInput = $x("//input[contains(@class, 'medium-field') and @name='os_password']").as("Поле Пароль");
+    private final SelenideElement submitButton = $x("//input[contains(@class, 'aui-button aui-button-primary') and @value='Войти']").as("Кнопка Войти");
+    private final SelenideElement dashboardTitle = $x("//h3[contains(@class, 'dashboard-item-title') and text()='Назначенные мне']").as("Таблица назначенных задач строка с надписью Назначенные мне");
 
-    public LoginPage openPage() {
-        open("https://edujira.ifellow.ru");
-        WebDriverRunner.getWebDriver().manage().window().maximize();
-        return this;
-    }
 
     public LoginPage login(String username, String password) {
-        locatorLoginPage.getUsernameInput().setValue(username);
-        locatorLoginPage.getPasswordInput().setValue(password);
-        locatorLoginPage.getSubmitButton().click();
-        locatorLoginPage.getDashboardTitle().shouldHave(text("Назначенные мне"));
+        usernameInput.setValue(username);
+        passwordInput.setValue(password);
+        submitButton.click();
+        dashboardTitle.shouldHave(text("Назначенные мне"));
         return this;
     }
 }
