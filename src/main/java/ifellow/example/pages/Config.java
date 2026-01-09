@@ -1,4 +1,4 @@
-package ConfiguringBrowser;
+package ifellow.example.pages;
 
 import java.io.IOException;
 import java.io.InputStream;

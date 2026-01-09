@@ -1,39 +1,35 @@
-package ifellow.example.test;
+package CucumSteps.steps;
 
-import ConfiguringBrowser.Config;
-import ConfiguringBrowser.WebHooks;
+import ifellow.example.pages.Config;
 import ifellow.example.pages.CreateBagPage;
-import ifellow.example.pages.LoginPage;
 import ifellow.example.pages.ProjectPage;
 import ifellow.example.pages.TaskSearchPage;
-import org.junit.jupiter.api.Test;
+import io.cucumber.java.ru.Когда;
+import io.cucumber.java.ru.Тогда;
+import org.junit.jupiter.api.Assertions;
 
-import static com.codeborne.selenide.Condition.visible;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+public class StepCreateBag {
+    ProjectPage projectPage = new ProjectPage();
+    TaskSearchPage taskSearchPage = new TaskSearchPage();
+    CreateBagPage createBagPage = new CreateBagPage();
 
-public class TestCreateBag extends WebHooks {
-    @Test
-    void Scenario() {
-        LoginPage loginPage = new LoginPage();
-        ProjectPage projectPage = new ProjectPage();
-        TaskSearchPage taskSearchPage = new TaskSearchPage();
-        CreateBagPage createBagPage = new CreateBagPage();
-
-        loginPage.login(Config.login, Config.password);
+    @Тогда("Пользователь открывает")
+    public void OpenProject() {
         projectPage.openProject(Config.project);
-        projectPage.switchTheFilter();
+    }
 
-        ProjectPage taskPage = new ProjectPage();
-        boolean isCreated = taskPage.createTask("Garag");
-        assertTrue(isCreated);
+    @Тогда("Пользователь создает задачу {string}")
+    public void IsCreated(String taskName) {
+        boolean isCreated = projectPage.createTask(taskName);
+        Assertions.assertTrue(isCreated);
+    }
 
-        taskSearchPage.openProjectBySearch("TestSeleniumATHomework");
-        taskSearchPage.CheckingStatuses();
-
+    @Когда("Пользователь создает баг {string}")
+    public void CreateBagPage(String bagName) {
         createBagPage.TapCreate();
         createBagPage.DropDownField(createBagPage.getProjectBag(), Config.project);
         createBagPage.DropDownField(createBagPage.getTaskType(), "Ошибка");
-        createBagPage.FillingInATextField(createBagPage.getTheSubjectField(), "BYM");
+        createBagPage.FillingInATextField(createBagPage.getTheSubjectField(), bagName);
         createBagPage.CheckField(createBagPage.getBottonVisualDescription());
         createBagPage.fillTinyMCE(createBagPage.getDescriptionField(), "BagBym");
         createBagPage.ClickVersion(createBagPage.getFixInVersions());
@@ -43,7 +39,16 @@ public class TestCreateBag extends WebHooks {
         createBagPage.fillTinyMCE(createBagPage.getEnvironmentField(), "BagBym");
         createBagPage.ClickVersion(createBagPage.getAffectedInVersions());
         createBagPage.ClickSeriousness(createBagPage.getClickSeriousness(), createBagPage.getClickSignificant());
-        createBagPage.getClickCreateBag().should(visible).click();
+        createBagPage.getClickCreateBag().click();
+    }
+
+    @Тогда("Баг успешно создан")
+    public void BagCreate() {
+        Assertions.assertTrue(createBagPage.getClickCreateBag().exists());
+    }
+
+    @Тогда("Пользователь проверяет баг в проекте")
+    public void OpenProjectBySearch() {
         taskSearchPage.openProjectBySearch("BYM");
         createBagPage.theEndOfWork(createBagPage.getClickBusinessProcesses(),
                 createBagPage.getClickBusinessProcessesDone(),

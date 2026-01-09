@@ -1,30 +1,27 @@
-package ConfiguringBrowser;
+package CucumSteps.steps;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import ifellow.example.pages.Config;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
 
-public class WebHooks {
-
-    @BeforeAll
-    public static void setUpAll() {
-
+public class CucumberWebHooks {
+    @Before
+    public void setUpScenario() {
         System.setProperty("webdriver.chrome.driver", Config.chromeDriverPath);
         Configuration.browser = Config.browser;
         Configuration.browserSize = null;
         Configuration.timeout = Config.timeout;
-        open(Config.baseUrl);
+        Selenide.open(Config.baseUrl);
         WebDriverRunner.getWebDriver().manage().window().maximize();
-
     }
 
-    @AfterEach
-    void tearDown() {
-
+    @After
+    public void tearDownScenario() {
         closeWebDriver();
     }
 }
