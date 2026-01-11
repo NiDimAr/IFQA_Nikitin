@@ -2,7 +2,6 @@ package org.RickAndMorty.Api;
 
 import org.RickAndMorty.Models.Character;
 import org.RickAndMorty.Specs.RequestSpec;
-import org.RickAndMorty.Specs.ResponseSpec;
 
 import static io.restassured.RestAssured.given;
 
@@ -14,7 +13,7 @@ public class CharacterApi {
                 .when()
                 .get("/character")
                 .then()
-                .spec(ResponseSpec.success200())
+                .statusCode(200)
                 .extract()
                 .jsonPath()
                 .getObject("results[0]", Character.class);
@@ -25,7 +24,7 @@ public class CharacterApi {
                 .when()
                 .get(url)
                 .then()
-                .spec(ResponseSpec.success200())
+                .statusCode(200)
                 .extract()
                 .as(Character.class);
     }

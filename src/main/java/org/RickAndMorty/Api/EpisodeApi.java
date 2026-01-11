@@ -1,7 +1,6 @@
 package org.RickAndMorty.Api;
 
 import org.RickAndMorty.Models.Episode;
-import org.RickAndMorty.Specs.ResponseSpec;
 
 import static io.restassured.RestAssured.given;
 
@@ -11,7 +10,7 @@ public class EpisodeApi {
                 .when()
                 .get(url)
                 .then()
-                .spec(ResponseSpec.success200())
+                .statusCode(200)
                 .extract()
                 .as(Episode.class);
     }
