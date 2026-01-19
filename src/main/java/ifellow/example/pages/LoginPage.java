@@ -3,6 +3,7 @@ package ifellow.example.pages;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 
@@ -14,8 +15,8 @@ public class LoginPage {
 
 
     public LoginPage login(String username, String password) {
-        usernameInput.setValue(username);
-        passwordInput.setValue(password);
+        usernameInput.shouldHave(visible).setValue(username);
+        passwordInput.shouldHave(visible).setValue(password);
         submitButton.click();
         dashboardTitle.shouldHave(text("Назначенные мне"));
         return this;
