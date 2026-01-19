@@ -1,10 +1,10 @@
 package CucumSteps.steps;
 
-import ifellow.example.pages.Config;
 import ifellow.example.pages.ProjectPage;
 import ifellow.example.pages.TaskSearchPage;
 import io.cucumber.java.ru.Тогда;
 import org.junit.jupiter.api.Assertions;
+import utils.Config;
 
 public class StepSeleniumATHomework {
     ProjectPage projectPage = new ProjectPage();
@@ -13,7 +13,7 @@ public class StepSeleniumATHomework {
 
     @Тогда("Пользователь открывает проект")
     public void OpenProject() {
-        projectPage.openProject(Config.project);
+        projectPage.openProject(Config.getProject());
     }
 
     @Тогда("Пользователь создает {string}")

@@ -1,8 +1,8 @@
 package CucumSteps.steps;
 
-import ifellow.example.pages.Config;
 import ifellow.example.pages.ProjectPage;
 import io.cucumber.java.ru.Тогда;
+import utils.Config;
 
 public class StepProjectTest {
 
@@ -11,6 +11,6 @@ public class StepProjectTest {
 
     @Тогда("Я открываю проект")
     public void openProject() {
-        projectPage.openProject(Config.project);
+        projectPage.openProject(Config.getProject());
     }
 }

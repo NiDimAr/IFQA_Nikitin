@@ -1,4 +1,4 @@
-package ConfiguringBrowser;
+package Runner;
 
 import io.cucumber.core.options.Constants;
 import org.junit.platform.suite.api.ConfigurationParameter;
@@ -13,7 +13,7 @@ import static io.cucumber.core.options.Constants.PLUGIN_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features/Features")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "CucumSteps.steps")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "CucumSteps.steps, ConfiguringBrowser")
 @ConfigurationParameter(key = Constants.EXECUTION_DRY_RUN_PROPERTY_NAME, value = "false")
 
 public class RunCucumberTest {

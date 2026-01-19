@@ -2,6 +2,8 @@ package ifellow.example.pages;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -17,7 +19,7 @@ public class LoginPage {
         usernameInput.setValue(username);
         passwordInput.setValue(password);
         submitButton.click();
-        dashboardTitle.shouldHave(text("Назначенные мне"));
+        dashboardTitle.shouldHave(text("Назначенные мне"), Duration.ofSeconds(5));
         return this;
     }
 }
