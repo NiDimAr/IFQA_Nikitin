@@ -12,7 +12,7 @@ public class TestAuthorization extends WebHooks {
     void fullScenario() {
 
         LoginPage loginPage = new LoginPage();
-        loginPage.login(Config.login, Config.password);
+        loginPage.login(Config.getLogin(), Config.getPassword());
 
     }
 }

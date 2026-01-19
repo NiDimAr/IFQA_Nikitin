@@ -17,10 +17,10 @@ public class TestSeleniumATHomework extends WebHooks {
         TaskSearchPage taskSearchPage = new TaskSearchPage();
 
 
-        loginPage.login(Config.login, Config.password);
+        loginPage.login(Config.getLogin(), Config.getPassword());
 
 
-        projectPage.openProject(Config.project);
+        projectPage.openProject(Config.getProject());
 
         projectPage.switchTheFilter();
 

@@ -1,25 +1,30 @@
 package ConfiguringBrowser;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
+import java.io.File;
+
 import static com.codeborne.selenide.Selenide.closeWebDriver;
-import static com.codeborne.selenide.Selenide.open;
 
 public class WebHooks {
 
     @BeforeAll
     public static void setUpAll() {
+        String driverPath = Config.getChromeDriver() + File.separator + "chromedriver-" + Config.getDriverVersion() + ".exe";
+        File driverFile = new File(driverPath);
+        if (driverFile.exists() && driverFile.canExecute()) {
+            System.setProperty("webdriver.chrome.driver", driverFile.getAbsolutePath());
+        }
 
-        System.setProperty("webdriver.chrome.driver", Config.chromeDriverPath);
-        Configuration.browser = Config.browser;
+        Configuration.browser = Config.getBrowser();
         Configuration.browserSize = null;
-        Configuration.timeout = Config.timeout;
-        open(Config.baseUrl);
+        Configuration.timeout = Config.getTimeout();
+        Selenide.open(Config.getBaseUrl());
         WebDriverRunner.getWebDriver().manage().window().maximize();
-
     }
 
     @AfterEach

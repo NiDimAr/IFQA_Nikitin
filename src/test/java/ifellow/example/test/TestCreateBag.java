@@ -19,8 +19,8 @@ public class TestCreateBag extends WebHooks {
         TaskSearchPage taskSearchPage = new TaskSearchPage();
         CreateBagPage createBagPage = new CreateBagPage();
 
-        loginPage.login(Config.login, Config.password);
-        projectPage.openProject(Config.project);
+        loginPage.login(Config.getLogin(), Config.getPassword());
+        projectPage.openProject(Config.getProject());
         projectPage.switchTheFilter();
 
         ProjectPage taskPage = new ProjectPage();
@@ -31,14 +31,14 @@ public class TestCreateBag extends WebHooks {
         taskSearchPage.CheckingStatuses();
 
         createBagPage.TapCreate();
-        createBagPage.DropDownField(createBagPage.getProjectBag(), Config.project);
+        createBagPage.DropDownField(createBagPage.getProjectBag(), Config.getProject());
         createBagPage.DropDownField(createBagPage.getTaskType(), "Ошибка");
         createBagPage.FillingInATextField(createBagPage.getTheSubjectField(), "BYM");
         createBagPage.CheckField(createBagPage.getBottonVisualDescription());
         createBagPage.fillTinyMCE(createBagPage.getDescriptionField(), "BagBym");
         createBagPage.ClickVersion(createBagPage.getFixInVersions());
         createBagPage.DropDownField(createBagPage.getTegBag(), "High");
-        createBagPage.FillingInATextField(createBagPage.getMarker(), Config.project);
+        createBagPage.FillingInATextField(createBagPage.getMarker(), Config.getProject());
         createBagPage.CheckField(createBagPage.getBottonVisualEnvironment());
         createBagPage.fillTinyMCE(createBagPage.getEnvironmentField(), "BagBym");
         createBagPage.ClickVersion(createBagPage.getAffectedInVersions());
