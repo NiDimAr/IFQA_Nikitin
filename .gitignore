@@ -10,7 +10,11 @@ out/
 # ===== Allure =====
 allure-results/
 allure-report/
+.allure/
 
 # ===== OS =====
 .DS_Store
 Thumbs.db
+
+# Gradle / build
+build/
