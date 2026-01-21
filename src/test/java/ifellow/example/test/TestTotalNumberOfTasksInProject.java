@@ -3,6 +3,7 @@ package ifellow.example.test;
 import ConfiguringBrowser.WebHooks;
 import ifellow.example.pages.LoginPage;
 import ifellow.example.pages.ProjectPage;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestTotalNumberOfTasksInProject extends WebHooks {
     @Test
+    @DisplayName("Проверка счетчика задач")
     void Scenario() {
 
         LoginPage loginPage = new LoginPage();
@@ -24,9 +26,7 @@ public class TestTotalNumberOfTasksInProject extends WebHooks {
         projectPage.switchTheFilter();
 
 
-        ProjectPage taskPage = new ProjectPage();
-        boolean isCreated = taskPage.createTask("BUMP");
-
+        boolean isCreated = projectPage.createTask("BUMP");
         assertTrue(isCreated);
 
 

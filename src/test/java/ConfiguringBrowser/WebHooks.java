@@ -1,8 +1,10 @@
 package ConfiguringBrowser;
 
+import Allure.AllureRun;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -10,10 +12,11 @@ import java.io.File;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
-public class WebHooks {
+public class WebHooks extends AllureRun {
 
     @BeforeAll
     public static void setUpAll() {
+
         String driverPath = Config.getChromeDriver() + File.separator + "chromedriver-" + Config.getDriverVersion() + ".exe";
         File driverFile = new File(driverPath);
         if (driverFile.exists() && driverFile.canExecute()) {
@@ -28,6 +31,7 @@ public class WebHooks {
     }
 
     @AfterEach
+    @Step("Закрытие браузера")
     void tearDown() {
 
         closeWebDriver();

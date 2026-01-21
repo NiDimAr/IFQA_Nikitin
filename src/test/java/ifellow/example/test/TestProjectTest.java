@@ -4,19 +4,19 @@ import ConfiguringBrowser.Config;
 import ConfiguringBrowser.WebHooks;
 import ifellow.example.pages.LoginPage;
 import ifellow.example.pages.ProjectPage;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class TestProjectTest extends WebHooks {
 
     @Test
+    @DisplayName("Тестирование открытия проекта и проверка статусов")
     void Scenario() {
 
         LoginPage loginPage = new LoginPage();
         ProjectPage projectPage = new ProjectPage();
 
-
         loginPage.login(Config.getLogin(), Config.getPassword());
-
 
         projectPage.openProject(Config.getProject());
 

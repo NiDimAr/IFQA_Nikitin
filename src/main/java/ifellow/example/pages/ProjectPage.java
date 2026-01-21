@@ -1,6 +1,7 @@
 package ifellow.example.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
@@ -19,7 +20,7 @@ public class ProjectPage {
     private final SelenideElement inputSummary = $x("//textarea[@name='summary']").as("Поле ввода для описания задачи");
     private final SelenideElement refresh = $x("//span[contains(@class,'aui-iconfont-refresh-small') and contains(text(),'Обновить результаты')]").as("Кнопка обновить");
 
-
+    @Step("Открываем проект")
     public void openProject(String name) {
         buttonProject
                 .should(appear)
@@ -28,6 +29,7 @@ public class ProjectPage {
         openTasks.shouldHave(text("Посмотреть все задачи и фильтры"));
     }
 
+    @Step("Переключаем фильтр на все задачи")
     public void switchTheFilter() {
         buttonSwitchFilter.click();
         buttonAllTasks.click();
@@ -42,6 +44,7 @@ public class ProjectPage {
         return Integer.parseInt(rightPart);
     }
 
+    @Step("Создание задачи и счетчик")
     public boolean createTask(String summary) {
         int oldCount = getTasksTotalCount();
         buttonCreateTask.shouldBe(visible).click();

@@ -28,6 +28,10 @@ public class Config {
     private static final String project;
     @Getter
     private static final String bugSummary;
+    @Getter
+    private static final boolean allureScreenshots;
+    @Getter
+    private static final boolean allureSavePageSource;
 
 
     static {
@@ -49,12 +53,19 @@ public class Config {
             timeout = requiredLong("timeout");
             project = required("project");
             bugSummary = required("bugSummary");
+            allureScreenshots = optionalBoolean("allure.screenshots", true);
+            allureSavePageSource = optionalBoolean("allure.savePageSource", false);
+
 
         } catch (IOException e) {
             throw new RuntimeException("Failed to load application.properties", e);
         }
     }
 
+    private static boolean optionalBoolean(String key, boolean defaultValue) {
+        String value = props.getProperty(key);
+        return value == null ? defaultValue : Boolean.parseBoolean(value);
+    }
 
     private static String required(String key) {
         String value = props.getProperty(key);

@@ -1,6 +1,7 @@
 package ifellow.example.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.Keys;
 
@@ -31,12 +32,13 @@ public class CreateBagPage {
     private final SelenideElement clickBusinessProcessesDone = $x("//a[normalize-space()='Выполнено' or .//span[normalize-space()='Выполнено']]").as("Кнопка Бизнес-процесс. Статус Выполнено");
     private final SelenideElement statusBusinessProcesses = $x("//span[contains(@class,'jira-issue-status-lozenge')]").as("Статус бизнес процесса");
 
-
+    @Step("Создание задачи")
     public void TapCreate() {
         clickCreate.click();
         createTaskHeading.should(appear);
     }
 
+    @Step("Заполнение поля с выборкой")
     public void DropDownField(SelenideElement locator, String Name) {
         locator.scrollIntoView(true).click();
         locator.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -45,11 +47,13 @@ public class CreateBagPage {
         locator.shouldHave(value(Name));
     }
 
+    @Step("Заполнение поля с выпадающим списоком")
     public void FillingInATextField(SelenideElement locator, String text) {
         locator.scrollIntoView(true).setValue(text);
         locator.shouldHave(value(text));
     }
 
+    @Step("Проверка кнопки Визуальный")
     public void CheckField(SelenideElement locator) {
         locator.scrollIntoView(false);
         if (!"true".equals(locator.getAttribute("aria-pressed"))) {
@@ -58,6 +62,7 @@ public class CreateBagPage {
         locator.shouldHave(attribute("aria-pressed", "true"));
     }
 
+    @Step("Заполнение полей с редактором")
     public void fillTinyMCE(SelenideElement locator, String text) {
         locator.scrollIntoView(false);
         switchTo().frame(locator);
@@ -67,11 +72,13 @@ public class CreateBagPage {
         switchTo().defaultContent();
     }
 
+    @Step("Выбор версии")
     public void ClickVersion(SelenideElement locator) {
         locator.should(exist).shouldBe(visible, enabled).click();
         locator.shouldBe(selected, Duration.ofSeconds(5));
     }
 
+    @Step("Выбор серьезности")
     public void ClickSeriousness(SelenideElement locator, SelenideElement locatorOption) {
         locator.should(visible).click();
         String value = locatorOption.getAttribute("value");
@@ -80,6 +87,12 @@ public class CreateBagPage {
         locator.shouldHave(attribute("value", value));
     }
 
+    @Step("Создание баг репорта")
+    public void CreateReported() {
+        getClickCreateBag().should(visible).click();
+    }
+
+    @Step("Закрытие задачи")
     public void theEndOfWork(SelenideElement locator, SelenideElement locatorOption, SelenideElement locatorStatus) {
         locator.should(appear, Duration.ofSeconds(10)).click();
         locatorOption.shouldBe(visible)

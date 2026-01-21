@@ -6,13 +6,14 @@ import ifellow.example.pages.CreateBagPage;
 import ifellow.example.pages.LoginPage;
 import ifellow.example.pages.ProjectPage;
 import ifellow.example.pages.TaskSearchPage;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.visible;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestCreateBag extends WebHooks {
     @Test
+    @DisplayName("Тестирование создания баг репорта")
     void Scenario() {
         LoginPage loginPage = new LoginPage();
         ProjectPage projectPage = new ProjectPage();
@@ -23,8 +24,8 @@ public class TestCreateBag extends WebHooks {
         projectPage.openProject(Config.getProject());
         projectPage.switchTheFilter();
 
-        ProjectPage taskPage = new ProjectPage();
-        boolean isCreated = taskPage.createTask("Garag");
+
+        boolean isCreated = projectPage.createTask("Garag");
         assertTrue(isCreated);
 
         taskSearchPage.openProjectBySearch("TestSeleniumATHomework");
@@ -43,7 +44,7 @@ public class TestCreateBag extends WebHooks {
         createBagPage.fillTinyMCE(createBagPage.getEnvironmentField(), "BagBym");
         createBagPage.ClickVersion(createBagPage.getAffectedInVersions());
         createBagPage.ClickSeriousness(createBagPage.getClickSeriousness(), createBagPage.getClickSignificant());
-        createBagPage.getClickCreateBag().should(visible).click();
+        createBagPage.CreateReported();
         taskSearchPage.openProjectBySearch("BYM");
         createBagPage.theEndOfWork(createBagPage.getClickBusinessProcesses(),
                 createBagPage.getClickBusinessProcessesDone(),
