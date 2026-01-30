@@ -3,14 +3,15 @@ package org.RickAndMorty.Steps;
 import org.RickAndMorty.Api.CharacterApi;
 import org.RickAndMorty.Models.Character;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 public class CharacterSteps {
 
     public static Character morty() {
         Character morty = CharacterApi.getCharacterByName("Morty Smith");
-        assertNotNull("Morty not found", morty);
+        assertNotNull(morty, "Morty not found");
 
         StepsUtils.printList("Morty episodes", morty.getEpisode());
 

@@ -5,14 +5,15 @@ import org.RickAndMorty.Api.EpisodeApi;
 import org.RickAndMorty.Models.Character;
 import org.RickAndMorty.Models.Episode;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 public class EpisodeSteps {
 
     public static Episode lastEpisode(String episodeUrl) {
         Episode episode = EpisodeApi.getEpisodeByUrl(episodeUrl);
-        assertNotNull("Episode not found", episode);
+        assertNotNull(episode, "Episode not found");
 
 
         StepsUtils.printList("Characters in episode " + episode.getName(), episode.getCharacters());
@@ -28,7 +29,7 @@ public class EpisodeSteps {
                 .get(episode.getCharacters().size() - 1);
 
         Character character = CharacterApi.getCharacterByUrl(url);
-        assertNotNull("Character not found", character);
+        assertNotNull(character, "Character not found");
 
 
         return character;

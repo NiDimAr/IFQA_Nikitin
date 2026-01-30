@@ -3,7 +3,8 @@ package ServerIF_HW5;
 import Config.Config;
 import ServerIF_HW5.Steps.AuthSteps;
 import ServerIF_HW5.models.AuthRequest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
 
 public class TestOpen {
 

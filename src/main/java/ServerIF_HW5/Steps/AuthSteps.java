@@ -4,7 +4,8 @@ import ServerIF_HW5.Api.AuthApi;
 import ServerIF_HW5.models.AuthRequest;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 public class AuthSteps {
 
