@@ -5,7 +5,6 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.Wait;
 
 
 public class ProjectPage {
@@ -21,7 +20,7 @@ public class ProjectPage {
     private final SelenideElement refresh = $x("//span[contains(@class,'aui-iconfont-refresh-small') and contains(text(),'Обновить результаты')]").as("Кнопка обновить");
 
     @Step("Открываем проект")
-    public void openProject(String name) {
+    public void openProject() {
         buttonProject
                 .should(appear)
                 .click();
@@ -29,12 +28,20 @@ public class ProjectPage {
         openTasks.shouldHave(text("Посмотреть все задачи и фильтры"));
     }
 
+    @Step("Проверка открытия проекта")
+    public boolean isProjectOpened() {
+        return openTasks.isDisplayed();
+    }
     @Step("Переключаем фильтр на все задачи")
     public void switchTheFilter() {
         buttonSwitchFilter.click();
         buttonAllTasks.click();
         vseZadachi.shouldHave(exactText("Все задачи"));
         refresh.click();
+    }
+
+    public boolean isAllTasksVisible() {
+        return vseZadachi.isDisplayed() && vseZadachi.getText().equals("Все задачи");
     }
 
     public int getTasksTotalCount() {
@@ -47,12 +54,11 @@ public class ProjectPage {
     @Step("Создание задачи и счетчик")
     public boolean createTask(String summary) {
         int oldCount = getTasksTotalCount();
+        String oldText = tasksCounter.getText();
         buttonCreateTask.shouldBe(visible).click();
-        inputSummary
-                .setValue(summary)
-                .pressEnter();
-        Wait().until(driver -> getTasksTotalCount() > oldCount);
+        inputSummary.setValue(summary).pressEnter();
+        tasksCounter.shouldNotHave(exactText(oldText));
         int newCount = getTasksTotalCount();
-        return newCount > oldCount;
+        return oldCount < newCount;
     }
 }

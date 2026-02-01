@@ -4,6 +4,7 @@ import Allure.AllureRun;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import config.ConfigReader;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,23 +18,29 @@ public class WebHooks extends AllureRun {
     @BeforeAll
     public static void setUpAll() {
 
-        String driverPath = Config.getChromeDriver() + File.separator + "chromedriver-" + Config.getDriverVersion() + ".exe";
-        File driverFile = new File(driverPath);
-        if (driverFile.exists() && driverFile.canExecute()) {
+        String version = ConfigReader.config.driverVersion();
+        String path = ConfigReader.config.chromeDriver()
+                + File.separator
+                + "chromedriver" + version + ".exe";
+
+        File driverFile = new File(path);
+
+        if (driverFile.exists()) {
             System.setProperty("webdriver.chrome.driver", driverFile.getAbsolutePath());
         }
 
-        Configuration.browser = Config.getBrowser();
+        Configuration.browser = ConfigReader.config.browser();
         Configuration.browserSize = null;
-        Configuration.timeout = Config.getTimeout();
-        Selenide.open(Config.getBaseUrl());
+        Configuration.timeout = ConfigReader.config.timeout();
+        Selenide.open(ConfigReader.config.baseUrl());
         WebDriverRunner.getWebDriver().manage().window().maximize();
+
     }
 
     @AfterEach
     @Step("Закрытие браузера")
     void tearDown() {
-
         closeWebDriver();
     }
+
 }

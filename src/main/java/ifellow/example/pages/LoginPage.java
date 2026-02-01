@@ -23,9 +23,12 @@ public class LoginPage {
         passwordInput.shouldBe(visible).setValue(withText(password).sensitive());
         submitButton.shouldBe(visible).click();
         dashboardTitle.shouldHave(text("Назначенные мне"));
-        return this;
 
+        return this;
     }
 
+    public boolean isDashboardVisible() {
+        return dashboardTitle.is(visible) && dashboardTitle.getText().equals("Назначенные мне");
+    }
 }
 

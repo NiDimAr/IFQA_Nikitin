@@ -32,6 +32,8 @@ public class CreateBagPage {
     private final SelenideElement clickBusinessProcessesDone = $x("//a[normalize-space()='Выполнено' or .//span[normalize-space()='Выполнено']]").as("Кнопка Бизнес-процесс. Статус Выполнено");
     private final SelenideElement statusBusinessProcesses = $x("//span[contains(@class,'jira-issue-status-lozenge')]").as("Статус бизнес процесса");
 
+    TaskSearchPage taskSearchPage = new TaskSearchPage();
+
     @Step("Создание задачи")
     public void TapCreate() {
         clickCreate.click();
@@ -99,5 +101,29 @@ public class CreateBagPage {
                 .click();
         locatorStatus.shouldBe(visible)
                 .shouldHave(text("Готово"));
+    }
+
+    @Step("Создание баг-репорта BYM")
+    public void createBagBym(String projectName, String taskTypeName, String summary, String description, String environment, String priority) {
+
+        TapCreate();
+
+        DropDownField(getProjectBag(), projectName);
+        DropDownField(getTaskType(), taskTypeName);
+        FillingInATextField(getTheSubjectField(), summary);
+        CheckField(getBottonVisualDescription());
+        fillTinyMCE(getDescriptionField(), description);
+        ClickVersion(getFixInVersions());
+        DropDownField(getTegBag(), priority);
+        FillingInATextField(getMarker(), projectName);
+        CheckField(getBottonVisualEnvironment());
+        fillTinyMCE(getEnvironmentField(), environment);
+        ClickVersion(getAffectedInVersions());
+        ClickSeriousness(getClickSeriousness(), getClickSignificant());
+        CreateReported();
+
+        taskSearchPage.openProjectBySearch(summary);
+        taskSearchPage.CheckingStatuses();
+        theEndOfWork(getClickBusinessProcesses(), getClickBusinessProcessesDone(), getStatusBusinessProcesses());
     }
 }
