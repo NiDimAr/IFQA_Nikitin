@@ -15,9 +15,6 @@ public class EpisodeSteps {
         Episode episode = EpisodeApi.getEpisodeByUrl(episodeUrl);
         assertNotNull(episode, "Episode not found");
 
-
-        StepsUtils.printList("Characters in episode " + episode.getName(), episode.getCharacters());
-
         return episode;
     }
 

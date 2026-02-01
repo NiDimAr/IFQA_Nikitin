@@ -49,7 +49,6 @@ public class AuthSteps {
         assertNotNull(token);
         return token;
     }
-
     public static void logout(String token, boolean expectSuccess) {
         if (expectSuccess) {
             AuthApi.logout(token)

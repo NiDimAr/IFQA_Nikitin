@@ -14,7 +14,7 @@ import static io.cucumber.core.options.Constants.PLUGIN_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "CucumberSteps.RickAndMortyCucum, CucumberSteps.ServerIFCucum")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "CucumberSteps.RickAndMortyCucum, CucumberSteps.ServerIFCucum,Hooks")
 @ConfigurationParameter(key = Constants.EXECUTION_DRY_RUN_PROPERTY_NAME, value = "false")
 
 public class RunCucumberTest {

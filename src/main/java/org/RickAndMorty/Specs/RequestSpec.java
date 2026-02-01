@@ -1,13 +1,15 @@
 package org.RickAndMorty.Specs;
 
-import Config.Config;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
+
+import static config.ConfigReader.config;
+
 
 public class RequestSpec {
     public static RequestSpecification defaultSpec() {
         return new RequestSpecBuilder()
-                .setBaseUri(Config.BASE_URL)
+                .setBaseUri(config.baseUrl())
                 .setContentType("application/json")
                 .build();
     }

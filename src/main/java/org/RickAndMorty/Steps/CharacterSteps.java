@@ -13,7 +13,6 @@ public class CharacterSteps {
         Character morty = CharacterApi.getCharacterByName("Morty Smith");
         assertNotNull(morty, "Morty not found");
 
-        StepsUtils.printList("Morty episodes", morty.getEpisode());
 
         return morty;
     }
